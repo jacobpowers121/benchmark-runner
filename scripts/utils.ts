@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 import { execSync } from 'child_process';
 import { paths } from '../config';
 
@@ -27,7 +28,17 @@ export function writeResult(manager: string, size: string, result: object) {
 }
 
 export function cleanGeneratedFiles(projectPath: string) {
-    const targets = ["dist", "bundle.js", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "bun.lockb"];
+    const targets = [
+        "dist",
+        "bundle.js",
+        "node_modules",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "bun.lock",
+        "deno.lock",
+        "yarn.lock",
+        "bun.lockb"
+    ];
 
     for (const target of targets) {
         const targetPath = path.join(projectPath, target);
@@ -35,5 +46,25 @@ export function cleanGeneratedFiles(projectPath: string) {
             fs.rmSync(targetPath, { recursive: true, force: true });
             console.log(`🧹 Removed: ${targetPath}`);
         }
+    }
+}
+
+export function getTransitiveDependencyCount(projectPath: string): number {
+    try {
+        const shell = os.platform() === "win32" ? "cmd.exe" : "bash";
+        const command =
+          os.platform() === "win32"
+            ? 'dir /s /b node_modules | findstr /R /C:"node_modules$" | find /C /V ""'
+            : 'find node_modules -type d -name node_modules | wc -l';
+
+        const output = execSync(command, {
+            cwd: projectPath,
+            shell
+        }).toString();
+
+        return parseInt(output.trim(), 10);
+    } catch (err) {
+        console.warn("Could not compute dependency count:", err);
+        return 0;
     }
 }

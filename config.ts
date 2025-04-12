@@ -8,7 +8,7 @@ export type ManagerConfig = {
     clean: string;
 };
 
-export const projectSizes: string[] = ["medium"];
+export const projectSizes: string[] = ["small", "medium", "large"];
 
 export const managers: Record<string, ManagerConfig> = {
     npm: {
@@ -41,10 +41,10 @@ export const managers: Record<string, ManagerConfig> = {
     },
     deno: {
         name: "deno",
-        install: "", // No install needed
+        install: "deno install",
         devBuild: "deno task build:dev",
         prodBuild: "deno task build:prod",
-        clean: "" // No cleanup needed
+        clean: "rm -rf node_modules deno.lock"
     }
 };
 
