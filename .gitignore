@@ -2,6 +2,7 @@
 **/node_modules/
 **/dist/
 **/bun.lockb
+**/bun.lock
 **/package-lock.json
 **/pnpm-lock.yaml
 **/yarn.lock
