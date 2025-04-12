@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "build:dev": "deno run -A npm:webpack --config webpack.config.mjs --mode development",
+    "build:prod": "deno run -A npm:webpack --config webpack.config.mjs --mode production"
+  }
+}
