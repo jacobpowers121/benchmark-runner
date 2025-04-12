@@ -8,7 +8,7 @@ export type ManagerConfig = {
     clean: string;
 };
 
-export const projectSizes: string[] = ["small"];
+export const projectSizes: string[] = ["medium"];
 
 export const managers: Record<string, ManagerConfig> = {
     npm: {
