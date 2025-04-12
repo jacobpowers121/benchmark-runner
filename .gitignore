@@ -1,0 +1,33 @@
+# Node modules for all subprojects
+**/node_modules/
+**/dist/
+**/bun.lockb
+**/package-lock.json
+**/pnpm-lock.yaml
+**/yarn.lock
+
+# Webpack and Babel output
+**/bundle.js
+**/*.map
+
+# VSCode settings
+.vscode/
+
+# Jetbrains
+.idea/
+
+# Deno cache
+**/.deno/
+
+# Mac/Windows/Editor junk
+.DS_Store
+Thumbs.db
+*.log
+
+# OS/system files
+ehthumbs.db
+Icon?
+
+# Benchmark output
+results/*
+!results/.gitkeep
